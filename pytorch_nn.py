@@ -67,7 +67,7 @@ def create_nn(batch_size=200, learning_rate=0.01, epochs=10,
             if batch_idx % log_interval == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.data[0]))
+                           100. * batch_idx / len(train_loader), loss.data))
 
     # run a test loop
     test_loss = 0
@@ -77,7 +77,7 @@ def create_nn(batch_size=200, learning_rate=0.01, epochs=10,
         data = data.view(-1, 28 * 28)
         net_out = net(data)
         # sum up batch loss
-        test_loss += criterion(net_out, target).data[0]
+        test_loss += criterion(net_out, target).data
         pred = net_out.data.max(1)[1]  # get the index of the max log-probability
         correct += pred.eq(target.data).sum()
 
